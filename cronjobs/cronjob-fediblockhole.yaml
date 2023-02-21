@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: fediblockhole
+  namespace: mastodon
+spec:
+  schedule: "0 4 * * 0"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: fediblockhole
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: fediblockhole
+              image: registry.******/fediblockhole
+              command:
+                - fediblock-sync
+              volumeMounts:
+                - name: config
+                  mountPath: /etc/default/fediblockhole.conf.toml
+                  subPath: fediblockhole
+                - name: config
+                  mountPath: /etc/default/safelist.csv
+                  subPath: safelist
+          volumes:
+            - name: config
+              configMap:
+                name: fediblockhole-confs
+          imagePullSecrets:
+          - name: docker-registry-key

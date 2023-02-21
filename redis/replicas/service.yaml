@@ -1,0 +1,24 @@
+---
+# Source: mastodon/charts/redis/templates/replicas/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-redis-replicas
+  namespace: "mastodon"
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/component: replica
+spec:
+  type: ClusterIP
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  ports:
+    - name: tcp-redis
+      port: 6379
+      targetPort: redis
+      nodePort: null
+  selector:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/component: replica

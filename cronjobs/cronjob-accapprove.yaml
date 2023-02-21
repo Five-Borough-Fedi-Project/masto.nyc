@@ -1,0 +1,74 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: masto-approveaccounts
+  namespace: mastodon
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Allow
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: masto-approveaccounts
+        spec:
+          volumes:
+            - name: assets
+              persistentVolumeClaim:
+                claimName: mastodon-assets
+            - name: system
+              persistentVolumeClaim:
+                claimName: mastodon-system
+          containers:
+            - name: masto-approveaccounts
+              image: tootsuite/mastodon:v4.1.0
+              command:
+                - bin/tootctl
+                - accounts
+                - approve
+                - --all
+              envFrom:
+                - configMapRef:
+                    name: mastodon-env
+                - secretRef:
+                    name: mastodon
+              env:
+                - name: DB_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: mastodon-postgresql
+                      key: password
+                - name: REDIS_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: mastodon-redis
+                      key: redis-password
+                - name: PORT
+                  value: '3000'
+              resources: {}
+              volumeMounts:
+                - name: assets
+                  mountPath: /opt/mastodon/public/assets
+                - name: system
+                  mountPath: /opt/mastodon/public/system
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 30
+          dnsPolicy: ClusterFirst
+          securityContext: {}
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                          - rails
+                  topologyKey: kubernetes.io/hostname
+          schedulerName: default-scheduler
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1

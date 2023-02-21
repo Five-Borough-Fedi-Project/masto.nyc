@@ -1,0 +1,64 @@
+---
+# Source: mastodon/templates/deployment-streaming.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-streaming
+  labels:
+    app.kubernetes.io/name: mastodon
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/version: "v4.1.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mastodon
+      app.kubernetes.io/instance: mastodon
+      app.kubernetes.io/component: streaming
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mastodon
+        app.kubernetes.io/instance: mastodon
+        app.kubernetes.io/component: streaming
+    spec:
+      serviceAccountName: mastodon
+      securityContext:
+        fsGroup: 991
+        runAsGroup: 991
+        runAsUser: 991
+      containers:
+        - name: mastodon-streaming
+          image: "tootsuite/mastodon:v4.1.0"
+          imagePullPolicy: IfNotPresent
+          command:
+            - node
+            - ./streaming
+          envFrom:
+            - configMapRef:
+                name: mastodon-env
+          env:
+            - name: "DB_PASS"
+              valueFrom:
+                secretKeyRef:
+                  name: mastodon-postgresql
+                  key: password
+            - name: "REDIS_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: mastodon-redis
+                  key: redis-password
+            - name: "PORT"
+              value: "4000"
+          ports:
+            - name: streaming
+              containerPort: 4000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/v1/streaming/health
+              port: streaming
+          readinessProbe:
+            httpGet:
+              path: /api/v1/streaming/health
+              port: streaming

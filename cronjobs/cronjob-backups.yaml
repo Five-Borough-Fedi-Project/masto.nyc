@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: masto-backups
+  namespace: mastodon
+spec:
+  # Backup the database every day at 2AM
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: masto-pg-backup
+            image: docker.io/bitnami/postgresql:14.2.0-debian-10-r14
+            command: ["/bin/sh"]
+            args: ["-c", 'pg_dump -U postgres -h mastodon-postgresql.mastodon mastodon_production > /media/seano/md0/System/k8s_persist/masto-backups/backup-$(date +"%m-%d-%Y-%H-%M").sql']
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mastodon-postgresql
+                  key: postgres-password
+            volumeMounts:
+            - mountPath: /media/seano/md0/System/k8s_persist/masto-backups
+              name: postgres-storage
+          - name: masto-redis-backup
+            image: docker.io/bitnami/redis:6.2.7-debian-11-r11
+            command: ["/bin/sh"]
+            args: ["-c", 'cp /data/dump.rdb /media/seano/md0/System/k8s_persist/masto-backups/backup-$(date +"%m-%d-%Y-%H-%M").rdb']
+            volumeMounts:
+            - mountPath: /media/seano/md0/System/k8s_persist/masto-backups
+              name: postgres-storage
+            - mountPath: /data
+              name: redis-data
+          restartPolicy: Never
+          volumes:
+          - name: postgres-storage
+            nfs:
+              server: ******
+              path: /media/seano/md0/System/k8s_persist/masto-backups
+          - name: redis-data
+            persistentVolumeClaim:
+              claimName: redis-data-mastodon-redis-master-0

@@ -1,0 +1,17 @@
+---
+# Source: mastodon/templates/pvc-assets.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mastodon-assets
+  labels:
+    app.kubernetes.io/name: mastodon
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/version: "v4.1.0"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-client

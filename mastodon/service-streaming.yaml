@@ -1,0 +1,21 @@
+---
+# Source: mastodon/templates/service-streaming.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-streaming
+  labels:
+    app.kubernetes.io/name: mastodon
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/version: "v4.1.0"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4000
+      targetPort: streaming
+      protocol: TCP
+      name: streaming
+  selector:
+    app.kubernetes.io/name: mastodon
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/component: streaming

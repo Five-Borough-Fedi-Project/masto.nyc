@@ -1,0 +1,25 @@
+---
+# Source: elasticsearch/templates/coordinating/svc-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-elasticsearch-coordinating-hl
+  namespace: "mastodon"
+  labels:
+    app.kubernetes.io/name: elasticsearch
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/component: coordinating-only
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: true
+  ports:
+    - name: tcp-rest-api
+      port: 9200
+      targetPort: rest-api
+    - name: tcp-transport
+      port: 9300
+      targetPort: transport
+  selector:
+    app.kubernetes.io/name: elasticsearch
+    app.kubernetes.io/instance: mastodon
+    app.kubernetes.io/component: coordinating-only
