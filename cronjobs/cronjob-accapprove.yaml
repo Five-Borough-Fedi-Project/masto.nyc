@@ -1,3 +1,8 @@
+# Auto-account Approval job
+# context: https://masto.nyc/@seano/109883742322567730
+# This job auto-approves any accounts who have requested to join
+# every five minutes. I would honestly LOVE to turn on open
+# sign ups, but they are simply too much of a bot honeypot. 
 apiVersion: batch/v1
 kind: CronJob
 metadata:

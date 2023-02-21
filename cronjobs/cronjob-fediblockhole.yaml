@@ -1,3 +1,6 @@
+# Block List Updates
+# We subscribe to the level 0 oliphant blocklists.
+# Refer to that for more details.
 apiVersion: batch/v1
 kind: CronJob
 metadata:

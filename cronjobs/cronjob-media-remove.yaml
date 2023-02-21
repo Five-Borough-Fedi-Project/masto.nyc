@@ -1,3 +1,6 @@
+# Media cleanup
+# We cleanup weekly, just like the default helm chart has set. There hasn't been
+# much of a need to extend or shorten that so far.
 ---
 # Source: mastodon/templates/cronjob-media-remove.yaml
 apiVersion: batch/v1

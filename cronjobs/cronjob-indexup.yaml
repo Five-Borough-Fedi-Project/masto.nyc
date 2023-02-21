@@ -1,3 +1,7 @@
+# Tags Updater
+# We are affected by:
+# https://github.com/mastodon/mastodon/issues/20230
+# Soooooooo this has to exist.
 apiVersion: batch/v1
 kind: CronJob
 metadata:

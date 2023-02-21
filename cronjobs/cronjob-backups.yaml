@@ -1,3 +1,7 @@
+# Postgres/Redis backup
+# We don't just back up because we have to (cough cough covenant), but
+# because it's a good practice! Also, never forget that your redis data
+# is persistent.
 apiVersion: batch/v1
 kind: CronJob
 metadata:
