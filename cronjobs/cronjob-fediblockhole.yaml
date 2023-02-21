@@ -17,7 +17,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: fediblockhole
-              image: registry.******/fediblockhole
+              image: docker-registry.default/fediblockhole
               command:
                 - fediblock-sync
               volumeMounts:
