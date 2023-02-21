@@ -40,7 +40,7 @@ spec:
           volumes:
           - name: postgres-storage
             nfs:
-              server: ******
+              server: "192.168.1.44"
               path: /media/seano/md0/System/k8s_persist/masto-backups
           - name: redis-data
             persistentVolumeClaim:
