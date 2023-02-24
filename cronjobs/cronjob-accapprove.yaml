@@ -28,11 +28,8 @@ spec:
           containers:
             - name: masto-approveaccounts
               image: tootsuite/mastodon:v4.1.0
-              command:
-                - bin/tootctl
-                - accounts
-                - approve
-                - --all
+              command: ["/bin/sh"]
+              args: ["-c", "bin/tootctl accounts approve --all && wget -S --spider $CRONURL"]
               envFrom:
                 - configMapRef:
                     name: mastodon-env
@@ -49,6 +46,11 @@ spec:
                     secretKeyRef:
                       name: mastodon-redis
                       key: redis-password
+                - name: CRONURL
+                  valueFrom:
+                    secretKeyRef:
+                      name: uptime-cron-notification
+                      key: accapprove
                 - name: PORT
                   value: '3000'
               resources: {}

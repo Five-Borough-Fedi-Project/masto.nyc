@@ -21,13 +21,18 @@ spec:
           - name: masto-pg-backup
             image: docker.io/bitnami/postgresql:14.2.0-debian-10-r14
             command: ["/bin/sh"]
-            args: ["-c", 'pg_dump -U postgres -h mastodon-postgresql.mastodon mastodon_production > /media/seano/md0/System/k8s_persist/masto-backups/backup-$(date +"%m-%d-%Y-%H-%M").sql && find /media/seano/md0/System/k8s_persist/masto-backups -maxdepth 1 -mtime +14 -type f -exec rm -rv {} +']
+            args: ["-c", 'pg_dump -U postgres -h mastodon-postgresql.mastodon mastodon_production > /media/seano/md0/System/k8s_persist/masto-backups/backup-$(date +"%m-%d-%Y-%H-%M").sql && find /media/seano/md0/System/k8s_persist/masto-backups -maxdepth 1 -mtime +14 -type f -exec rm -rv {} + && curl -I $CRONURL']
             env:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mastodon-postgresql
                   key: postgres-password
+            - name: CRONURL
+              valueFrom:
+                secretKeyRef:
+                  name: uptime-cron-notification
+                  key: db-backup
             volumeMounts:
             - mountPath: /media/seano/md0/System/k8s_persist/masto-backups
               name: postgres-storage
