@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: libretranslate
+  namespace: mastodon
+spec:
+  selector:
+    matchLabels:
+      app: libretranslate
+  template:
+    metadata:
+      labels:
+        app: libretranslate
+    spec:
+      containers:
+      - name: libretranslate
+        image: libretranslate/libretranslate:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: "LT_HOST"
+          value: "0.0.0.0"
+        - name: "LT_UPDATE_MODELS"
+          value: "true"
+        - name: "LT_DISABLE_WEB_UI"
+          value: "true"

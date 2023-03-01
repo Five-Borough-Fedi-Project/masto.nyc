@@ -47,3 +47,6 @@ data:
   VAPID_PUBLIC_KEY: {{SHUN}}
   OTP_SECRET: {{FOR YOU PARANOID TYPES}}
   SECRET_KEY_BASE: {{JK EVERYONE SHOULD USE THIS}}
+  # This is for libretranslate
+  ALLOWED_PRIVATE_ADDRESSES: "10.0.0.0/8"
+  LIBRE_TRANSLATE_ENDPOINT: "http://libretranslate-svc.mastodon:5000"
