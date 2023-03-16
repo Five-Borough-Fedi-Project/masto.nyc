@@ -10,11 +10,16 @@ metadata:
     app.kubernetes.io/version: "v4.1.0"
 data:
   TRUSTED_PROXY_IP: {{CLOUDFLARE TUNNEL IP}}
-  DB_HOST: mastodon-postgresql
+  DB_HOST: crunchy-mastodon-pgbouncer.mastodon
   DB_PORT: "5432"
   DB_NAME: mastodon_production
   DB_POOL: "25"
-  DB_USER: postgres
+  DB_USER: mastodon
+  # This needs to exist as long as the pg server cert isn't trusted >_>
+  # https://stackoverflow.com/questions/45088006/nodejs-error-self-signed-certificate-in-certificate-chain
+  # https://github.com/mastodon/mastodon/issues/23716
+  DB_SSLMODE: require
+  NODE_TLS_REJECT_UNAUTHORIZED: "0"
   DEFAULT_LOCALE: en
   ES_ENABLED: "true"
   ES_HOST: mastodon-elasticsearch-master-hl

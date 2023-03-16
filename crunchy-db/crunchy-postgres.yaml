@@ -1,0 +1,69 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: crunchy-mastodon
+  namespace: mastodon
+spec:
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.7-0
+  postgresVersion: 14
+  users:
+    - name: postgres
+    - name: mastodon
+      databases:
+        - mastodon_production
+      options: "NOSUPERUSER INHERIT CREATEDB LOGIN NOREPLICATION NOBYPASSRLS"
+  instances:
+    - name: mastodon
+      replicas: 2
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 100Gi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/cluster: crunchy-mastodon
+                  postgres-operator.crunchydata.com/instance-set: mastodon
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.41-4
+      repos:
+      - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            storageClassName: nfs-client
+            resources:
+              requests:
+                storage: 100Gi
+  proxy:
+    pgBouncer:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.18-0
+      replicas: 2
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/cluster: crunchy-mastodon
+                  postgres-operator.crunchydata.com/role: pgbouncer
+  userInterface:
+    pgAdmin:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-10
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
