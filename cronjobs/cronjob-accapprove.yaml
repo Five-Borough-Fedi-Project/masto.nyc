@@ -27,7 +27,7 @@ spec:
                 claimName: mastodon-system
           containers:
             - name: masto-approveaccounts
-              image: tootsuite/mastodon:v4.1.0
+              image: ghcr.io/mastodon/mastodon:v4.1.1
               command: ["/bin/sh"]
               args: ["-c", "bin/tootctl accounts approve --all && wget -S --spider $CRONURL"]
               envFrom:

@@ -26,7 +26,7 @@ spec:
                 claimName: mastodon-system
           containers:
             - name: masto-indexup
-              image: tootsuite/mastodon:v4.1.0
+              image: ghcr.io/mastodon/mastodon:v4.1.1
               command:
                 - bin/tootctl
                 - search

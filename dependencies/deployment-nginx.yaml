@@ -1,0 +1,34 @@
+---
+# Source: mastodon/templates/deployment-web.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-nginx
+  namespace: mastodon
+  labels:
+    app.kubernetes.io/name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nginx
+    spec:
+      volumes:
+        - name: masto-nginx-config
+          configMap:
+            name: masto-nginx-config-prd
+      containers:
+        - name: mastodon-nginx
+          image: nginx:alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80
+            name: http
+          volumeMounts:
+            - name: masto-nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf

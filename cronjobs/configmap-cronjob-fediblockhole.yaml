@@ -1,26 +1,26 @@
-# This is a SANITIZED file where sensitive values have been redacted, and not in actual use. 
-# This should only be used as reference. Values that need replacing surrounded by {{}}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: fediblockhole-confs
-  namespace: mastodon
-data:
-  safelist: |
-    masto.nyc
-  fediblockhole: |-
-    blocklist_instance_sources = [
-    ]
-    blocklist_url_sources = [
-      { url = 'https://codeberg.org/oliphant/blocklists/raw/branch/main/blocklists/_unified_tier0_blocklist.csv', format = 'csv' },
-    ]
+# # This is a SANITIZED file where sensitive values have been redacted, and not in actual use. 
+# # This should only be used as reference. Values that need replacing surrounded by {{}}
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: fediblockhole-confs
+#   namespace: mastodon
+# data:
+#   safelist: |
+#     masto.nyc
+#   fediblockhole: |-
+#     blocklist_instance_sources = [
+#     ]
+#     blocklist_url_sources = [
+#       { url = 'https://codeberg.org/oliphant/blocklists/raw/branch/main/blocklists/_unified_tier0_blocklist.csv', format = 'csv' },
+#     ]
 
-    allowlist_url_sources = [
-      { url = 'file:///etc/default/safelist.csv', format = 'csv' },
-    ]
+#     allowlist_url_sources = [
+#       { url = 'file:///etc/default/safelist.csv', format = 'csv' },
+#     ]
 
-    no_push_instance = false
+#     no_push_instance = false
 
-    blocklist_instance_destinations = [
-      { domain = 'masto.nyc', token = '{{API_TOKEN}}', max_followed_severity = 'silence'},
-    ]
+#     blocklist_instance_destinations = [
+#       { domain = 'masto.nyc', token = '{{API_TOKEN}}', max_followed_severity = 'silence'},
+#     ]

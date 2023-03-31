@@ -1,57 +1,57 @@
-# This is a SANITIZED file where sensitive values have been redacted, and not in actual use. 
-# This should only be used as reference. Values that need replacing surrounded by {{}}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mastodon-env
-  labels:
-    app.kubernetes.io/name: mastodon
-    app.kubernetes.io/instance: mastodon
-    app.kubernetes.io/version: "v4.1.0"
-data:
-  TRUSTED_PROXY_IP: {{CLOUDFLARE TUNNEL IP}}
-  DB_HOST: crunchy-mastodon-pgbouncer.mastodon
-  DB_PORT: "5432"
-  DB_NAME: mastodon_production
-  DB_POOL: "25"
-  DB_USER: mastodon
-  # This needs to exist as long as the pg server cert isn't trusted >_>
-  # https://stackoverflow.com/questions/45088006/nodejs-error-self-signed-certificate-in-certificate-chain
-  # https://github.com/mastodon/mastodon/issues/23716
-  DB_SSLMODE: require
-  NODE_TLS_REJECT_UNAUTHORIZED: "0"
-  DEFAULT_LOCALE: en
-  ES_ENABLED: "true"
-  ES_HOST: mastodon-elasticsearch-master-hl
-  ES_PORT: "9200"
-  LOCAL_DOMAIN: masto.nyc
-  # https://devcenter.heroku.com/articles/tuning-glibc-memory-behavior
-  MALLOC_ARENA_MAX: "2"
-  NODE_ENV: "production"
-  RAILS_ENV: "production"
-  REDIS_HOST: mastodon-redis-master
-  REDIS_PORT: "6379"
-  SMTP_FROM_ADDRESS: notifications@masto.nyc
-  SMTP_LOGIN: {{SNAIL MAIL}}
-  SMTP_PASSWORD: {{SECRET SNAIL MAIL}}
-  SMTP_PORT: "587"
-  SMTP_SERVER: {{WHY IS SES SO DAMNED CHEAP GOD I HATE AMAZON}}
-  STREAMING_CLUSTER_NUM: "1"
-  S3_ENABLED: "true"
-  S3_ALIAS_HOST: cdn.masto.nyc
-  S3_BUCKET: mastodon
-  AWS_ACCESS_KEY_ID: {{THIS IS ACTUALLY CLOUDFLARE}}
-  AWS_SECRET_ACCESS_KEY: {{THIS IS ACTUALLY CLOUDFLARE BUT DON'T TELL ANYONE}}
-  S3_REGION: us-east-1
-  S3_PROTOCOL: https
-  S3_PERMISSION: private
-  S3_ENDPOINT: {{THIS MAY ACTUALLY NOT BE SENSITIVE}}
-  STREAMING_API_BASE_URL: "wss://streaming.masto.nyc"
-  NODE_TLS_REJECT_UNAUTHORIZED: "0"
-  VAPID_PRIVATE_KEY: {{VAPE NAYSH}}
-  VAPID_PUBLIC_KEY: {{SHUN}}
-  OTP_SECRET: {{FOR YOU PARANOID TYPES}}
-  SECRET_KEY_BASE: {{JK EVERYONE SHOULD USE THIS}}
-  # This is for libretranslate
-  ALLOWED_PRIVATE_ADDRESSES: "10.0.0.0/8"
-  LIBRE_TRANSLATE_ENDPOINT: "http://libretranslate-svc.mastodon:5000"
+# # This is a SANITIZED file where sensitive values have been redacted, and not in actual use. 
+# # This should only be used as reference. Values that need replacing surrounded by {{}}
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: mastodon-env
+#   labels:
+#     app.kubernetes.io/name: mastodon
+#     app.kubernetes.io/instance: mastodon
+#     app.kubernetes.io/version: "v4.1.1"
+# data:
+#   TRUSTED_PROXY_IP: {{CLOUDFLARE TUNNEL IP}}
+#   DB_HOST: crunchy-mastodon-pgbouncer.mastodon
+#   DB_PORT: "5432"
+#   DB_NAME: mastodon_production
+#   DB_POOL: "25"
+#   DB_USER: mastodon
+#   # This needs to exist as long as the pg server cert isn't trusted >_>
+#   # https://stackoverflow.com/questions/45088006/nodejs-error-self-signed-certificate-in-certificate-chain
+#   # https://github.com/mastodon/mastodon/issues/23716
+#   DB_SSLMODE: require
+#   NODE_TLS_REJECT_UNAUTHORIZED: "0"
+#   DEFAULT_LOCALE: en
+#   ES_ENABLED: "true"
+#   ES_HOST: mastodon-elasticsearch-master-hl
+#   ES_PORT: "9200"
+#   LOCAL_DOMAIN: masto.nyc
+#   # https://devcenter.heroku.com/articles/tuning-glibc-memory-behavior
+#   MALLOC_ARENA_MAX: "2"
+#   NODE_ENV: "production"
+#   RAILS_ENV: "production"
+#   REDIS_HOST: mastodon-redis-master
+#   REDIS_PORT: "6379"
+#   SMTP_FROM_ADDRESS: notifications@masto.nyc
+#   SMTP_LOGIN: {{SNAIL MAIL}}
+#   SMTP_PASSWORD: {{SECRET SNAIL MAIL}}
+#   SMTP_PORT: "587"
+#   SMTP_SERVER: {{WHY IS SES SO DAMNED CHEAP GOD I HATE AMAZON}}
+#   STREAMING_CLUSTER_NUM: "1"
+#   S3_ENABLED: "true"
+#   S3_ALIAS_HOST: cdn.masto.nyc
+#   S3_BUCKET: mastodon
+#   AWS_ACCESS_KEY_ID: {{THIS IS ACTUALLY CLOUDFLARE}}
+#   AWS_SECRET_ACCESS_KEY: {{THIS IS ACTUALLY CLOUDFLARE BUT DON'T TELL ANYONE}}
+#   S3_REGION: us-east-1
+#   S3_PROTOCOL: https
+#   S3_PERMISSION: private
+#   S3_ENDPOINT: {{THIS MAY ACTUALLY NOT BE SENSITIVE}}
+#   STREAMING_API_BASE_URL: "wss://streaming.masto.nyc"
+#   NODE_TLS_REJECT_UNAUTHORIZED: "0"
+#   VAPID_PRIVATE_KEY: {{VAPE NAYSH}}
+#   VAPID_PUBLIC_KEY: {{SHUN}}
+#   OTP_SECRET: {{FOR YOU PARANOID TYPES}}
+#   SECRET_KEY_BASE: {{JK EVERYONE SHOULD USE THIS}}
+#   # This is for libretranslate
+#   ALLOWED_PRIVATE_ADDRESSES: "10.0.0.0/8"
+#   LIBRE_TRANSLATE_ENDPOINT: "http://libretranslate-svc.mastodon:5000"
