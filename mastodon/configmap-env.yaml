@@ -44,7 +44,8 @@
 #   AWS_SECRET_ACCESS_KEY: {{THIS IS ACTUALLY CLOUDFLARE BUT DON'T TELL ANYONE}}
 #   S3_REGION: us-east-1
 #   S3_PROTOCOL: https
-#   S3_PERMISSION: private
+#   # https://docs.joinmastodon.org/admin/optional/object-storage/#cloudflare-r2
+#   S3_PERMISSION: ""
 #   S3_ENDPOINT: {{THIS MAY ACTUALLY NOT BE SENSITIVE}}
 #   STREAMING_API_BASE_URL: "wss://streaming.masto.nyc"
 #   NODE_TLS_REJECT_UNAUTHORIZED: "0"

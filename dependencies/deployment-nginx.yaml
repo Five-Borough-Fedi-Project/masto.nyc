@@ -32,3 +32,10 @@ spec:
             - name: masto-nginx-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+      volumes:
+      - name: masto-nginx-config
+        configMap:
+          name: masto-nginx-config
+          items:
+          - key: nginx.conf
+            path: nginx.conf
