@@ -10,7 +10,7 @@ metadata:
   labels:
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/instance: mastodon
-    app.kubernetes.io/version: "v4.1.2"
+    app.kubernetes.io/version: "v4.1.4"
 spec:
   schedule: 0 0 * * 0
   jobTemplate:
@@ -41,7 +41,7 @@ spec:
                 claimName: mastodon-system
           containers:
             - name: mastodon-media-remove
-              image: "ghcr.io/mastodon/mastodon:v4.1.2"
+              image: "ghcr.io/mastodon/mastodon:v4.1.4"
               imagePullPolicy: IfNotPresent
               command:
                 - bin/tootctl
