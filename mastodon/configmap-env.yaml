@@ -7,7 +7,7 @@
 #   labels:
 #     app.kubernetes.io/name: mastodon
 #     app.kubernetes.io/instance: mastodon
-#     app.kubernetes.io/version: "v4.1.4"
+#     app.kubernetes.io/version: "v4.1.6"
 # data:
 #   TRUSTED_PROXY_IP: {{CLOUDFLARE TUNNEL IP}}
 #   DB_HOST: crunchy-mastodon-pgbouncer.mastodon
