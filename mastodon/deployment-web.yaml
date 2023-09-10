@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: mastodon
     app.kubernetes.io/version: "v4.1.6"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/name: mastodon

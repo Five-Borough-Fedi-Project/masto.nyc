@@ -9,9 +9,11 @@ metadata:
   name: masto-approveaccounts
   namespace: mastodon
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "5 * * 12 *"
   concurrencyPolicy: Allow
   suspend: false
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
@@ -77,5 +79,3 @@ spec:
                           - rails
                   topologyKey: kubernetes.io/hostname
           schedulerName: default-scheduler
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1

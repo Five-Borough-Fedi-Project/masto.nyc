@@ -13,6 +13,8 @@ metadata:
     app.kubernetes.io/version: "v4.1.6"
 spec:
   schedule: 0 0 * * 0
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
