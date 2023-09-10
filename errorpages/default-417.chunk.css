@@ -1,0 +1,109 @@
+@font-face{
+    font-family:mastodon-font-sans-serif;
+    src:local("Roboto");
+    font-weight:400;
+    font-display:swap;
+    font-style:normal
+}
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:100%;
+    font:inherit;
+    vertical-align:baseline
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+    display:block
+}
+body{
+    line-height:1
+}
+ol,ul{
+    list-style:none
+}
+blockquote,q{
+    quotes:none
+}
+blockquote:after,blockquote:before,q:after,q:before{
+    content:"";
+    content:none
+}
+table{
+    border-collapse:collapse;
+    border-spacing:0
+}
+html{
+    scrollbar-color:#313543 rgba(0,0,0,.1)
+}
+::-webkit-scrollbar{
+    width:12px;
+    height:12px
+}
+::-webkit-scrollbar-thumb{
+    background:#313543;
+    border:0 #fff;
+    border-radius:50px
+}
+::-webkit-scrollbar-thumb:hover{
+    background:#353a49
+}
+::-webkit-scrollbar-thumb:active{
+    background:#313543
+}
+::-webkit-scrollbar-track{
+    border:0 #fff;
+    border-radius:0;
+    background:rgba(0,0,0,.1)
+}
+::-webkit-scrollbar-track:active,::-webkit-scrollbar-track:hover{
+    background:#282c37
+}
+::-webkit-scrollbar-corner{
+    background:transparent
+}
+body{
+    font-family:"mastodon-font-sans-serif",sans-serif;
+    background:#191b22;
+    font-size:13px;
+    line-height:18px;
+    font-weight:400;
+    color:#fff;
+    text-rendering:optimizelegibility;
+    font-feature-settings:"kern";
+    -webkit-text-size-adjust:none;
+    -moz-text-size-adjust:none;
+    text-size-adjust:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0)
+}
+body.system-font{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,"mastodon-font-sans-serif",sans-serif
+}
+body.error{
+    position:absolute;
+    text-align:center;
+    color:#9baec8;
+    background:#282c37;
+    width:100%;
+    height:100%;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+body.error .dialog{
+    vertical-align:middle;
+    margin:20px
+}
+body.error .dialog__illustration img{
+    display:block;
+    max-width:470px;
+    width:100%;
+    height:auto;
+    margin-top:-120px
+}
+body.error .dialog h1{
+    font-size:20px;
+    line-height:28px;
+    font-weight:400
+}
