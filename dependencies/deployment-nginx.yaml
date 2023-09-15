@@ -23,7 +23,7 @@ spec:
             name: masto-nginx-config-prd
       containers:
         - name: mastodon-nginx
-          image: nginx:alpine
+          image: nginx:1.25.2-alpine
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 80

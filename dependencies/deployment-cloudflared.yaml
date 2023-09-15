@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 2 # You could also consider elastic scaling for this deployment
+  replicas: 1 # You could also consider elastic scaling for this deployment
   revisionHistoryLimit: 3
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: cloudflared
-        image: cloudflare/cloudflared:2023.3.1
+        image: cloudflare/cloudflared:2023.8.2
         # resources:
         #   limits:
         #     memory: "2Gi"
