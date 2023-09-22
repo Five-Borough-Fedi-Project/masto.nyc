@@ -6,4 +6,4 @@ This is where you can find the Kubernetes yaml that supports masto.nyc. This is 
 
 High level arch:
 
-![high level architecture](image link)
+![high level architecture](https://raw.githubusercontent.com/seano-vs/masto.nyc/main/docs/high_level_arch.drawio.png)
