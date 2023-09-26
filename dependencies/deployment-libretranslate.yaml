@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: libretranslate
-        image: libretranslate/libretranslate:latest
+        image: libretranslate/libretranslate:v1.3.11
         ports:
         - containerPort: 5000
         env:

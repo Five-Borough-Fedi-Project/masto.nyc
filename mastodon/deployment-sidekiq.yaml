@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/instance: mastodon
-    app.kubernetes.io/version: "v4.1.7"
+    app.kubernetes.io/version: "v4.2.0"
     app.kubernetes.io/component: sidekiq-all-queues
     app.kubernetes.io/part-of: rails
 spec:
@@ -44,7 +44,7 @@ spec:
         - name: mastodon
           securityContext:
             {}
-          image: "ghcr.io/mastodon/mastodon:v4.1.7"
+          image: "ghcr.io/mastodon/mastodon:v4.2.0"
           imagePullPolicy: IfNotPresent
           command:
             - bundle
