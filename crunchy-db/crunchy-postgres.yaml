@@ -4,7 +4,7 @@ metadata:
   name: crunchy-mastodon
   namespace: mastodon
 spec:
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.7-0
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.10-0
   postgresVersion: 14
   users:
     - name: postgres
@@ -33,7 +33,7 @@ spec:
                   postgres-operator.crunchydata.com/instance-set: mastodon
   backups:
     pgbackrest:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.41-4
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.47-2
       repos:
       - name: repo1
         volume:
@@ -46,7 +46,7 @@ spec:
                 storage: 100Gi
   proxy:
     pgBouncer:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.18-0
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.21-0
       replicas: 2
       affinity:
         podAntiAffinity:
@@ -60,7 +60,7 @@ spec:
                   postgres-operator.crunchydata.com/role: pgbouncer
   userInterface:
     pgAdmin:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-10
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-7.8-0
       dataVolumeClaimSpec:
         accessModes:
         - "ReadWriteOnce"
