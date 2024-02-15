@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/instance: mastodon
-    app.kubernetes.io/version: "v4.2.4"
+    app.kubernetes.io/version: "v4.2.6"
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
         runAsUser: 991
       containers:
         - name: mastodon-streaming
-          image: "ghcr.io/mastodon/mastodon:v4.2.4"
+          image: "ghcr.io/mastodon/mastodon:v4.2.6"
           imagePullPolicy: IfNotPresent
           command:
             - node
