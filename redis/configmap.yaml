@@ -13,6 +13,8 @@ data:
     # User-supplied common configuration:
     # Enable AOF https://redis.io/topics/persistence#append-only-file
     appendonly yes
+    # https://github.com/Five-Borough-Fedi-Project/masto.nyc/issues/1
+    appendfsync always
     # Disable RDB persistence, AOF persistence already enabled.
     save ""
     # End of common configuration
