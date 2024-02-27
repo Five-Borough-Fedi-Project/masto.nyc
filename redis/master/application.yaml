@@ -31,8 +31,15 @@ spec:
         fsGroup: 1001
       serviceAccountName: mastodon-redis
       affinity:
-        podAffinity:
-          
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                # dirty hardcoding of hostnames.
+                values:
+                - microwave
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -50,7 +57,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: docker.io/bitnami/redis:6.2.7-debian-11-r11
+          image: docker.io/bitnami/redis:7.2.4
           imagePullPolicy: "IfNotPresent"
           securityContext:
             runAsUser: 1001
