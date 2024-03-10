@@ -15,6 +15,7 @@ spec:
       containers:
       - name: welcome-webhook
         image: registry.packet.farm/welcome
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
