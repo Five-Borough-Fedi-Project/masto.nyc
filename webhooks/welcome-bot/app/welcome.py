@@ -33,7 +33,7 @@ def root(event: AccountCreatedEvent):
     # For the love of god don't delete that first newline
     message = account_id + \
         " \n" \
-        "Welcome to masto.nyc! \n" \
+        " Welcome to masto.nyc! \n" \
         "We hope you emjoy your stay here! \n" \
         "If you are new to Mastodon, we've put together a brief packet with some tips and pointers: \n" \
         "https://docs.google.com/document/d/1wSD4W_hcuChgiNjZLxRBafcSeOLFRFeBt0Q0e7hDk2U"
