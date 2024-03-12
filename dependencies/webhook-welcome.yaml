@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-webhook
+  namespace: mastodon
+spec:
+  selector:
+    matchLabels:
+      app: welcome-webhook
+  template:
+    metadata:
+      labels:
+        app: welcome-webhook
+    spec:
+      containers:
+      - name: welcome-webhook
+        image: registry.packet.farm/welcome
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: "WELCOMEACCESSTOKEN"
+          valueFrom:
+            secretKeyRef:
+              name: welcome-access
+              key: key
+      imagePullSecrets:
+      - name: docker-registry-key
