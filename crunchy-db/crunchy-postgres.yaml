@@ -34,8 +34,18 @@ spec:
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.47-2
+      global:
+        repo1-retention-full: "14"
+        repo1-retention-full-type: time
+      manual:
+        repoName: repo1
+        options:
+         - --type=full
       repos:
       - name: repo1
+        schedules:
+          full: "0 1 * * 0"
+          differential: "0 1 * * 1-6"
         volume:
           volumeClaimSpec:
             accessModes:
