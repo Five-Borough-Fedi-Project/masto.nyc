@@ -29,7 +29,7 @@ spec:
                 claimName: mastodon-system
           containers:
             - name: masto-approveaccounts
-              image: ghcr.io/mastodon/mastodon:v4.2.9
+              image: ghcr.io/mastodon/mastodon:v4.2.10
               command: ["/bin/sh"]
               args: ["-c", "bin/tootctl accounts approve --all && wget -S --spider $CRONURL"]
               envFrom:
